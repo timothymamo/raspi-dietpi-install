@@ -3,8 +3,7 @@
 # Change directory to $[HOME]
 pushd ${HOME}
 
-# Crate a password for the user
-sudo passwd ${USER}
+sudo ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "${USER}@${HOST}"
 
 # Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -26,6 +25,9 @@ chsh -s "$(command -v zsh)" ${USER}
 # Start the containers
 pushd ${HOME}/docker-compose
 docker compose up -d
+
+# Crate a password for the user
+sudo passwd ${USER}
 
 # Reboot the system
 sudo poweroff --reboot
