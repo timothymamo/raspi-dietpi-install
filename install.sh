@@ -3,27 +3,20 @@
 # Change directory to $[HOME]
 pushd ${HOME}
 
+# Crate a password for the user
+passwd ${USER}
+
 # Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 
 # Set brew in shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Install everything with the Brewfile
+# Install everything within the Brewfile
 brew bundle
-
 brew install --cask font-fira-code-nerd-font
 
-# Set zsh as the default shell for the ${USER}
-command -v zsh | sudo tee -a /etc/shells
-sudo chsh -s "$(command -v zsh)" ${USER}
-
-# Restart sshd
-sudo systemctl restart sshd
-
-# Setup Docker to have the appropriate permissions
-sudo usermod -aG docker ${USER}
-sudo systemctl enable docker
+# Start the containers
 pushd ${HOME}/docker-compose
 docker compose up -d
 

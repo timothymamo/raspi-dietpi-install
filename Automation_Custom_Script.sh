@@ -1,33 +1,44 @@
 #!/bin/bash
 
-adduser --disabled-password --gecos "" tim
-usermod -aG sudo tim
-passwd -d tim
+USER_SCRIPT="tim"
+HOME_USER="/home/${USER_SCRIPT}"
 
-cp -r /root/.ssh/ /home/tim
-chown -R tim:tim /home/tim/.ssh
+HTTPS_REPO="https://github.com/timothymamo/dietpi-post-install.git"
 
-echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
+# Create super user with no password
+adduser --disabled-password --gecos "" ${USER_SCRIPT}
+usermod -aG sudo ${USER_SCRIPT}
+passwd -d ${USER_SCRIPT}
 
+# Copy the .ssh directory
+cp -r /root/.ssh/ ${HOME_USER}
+
+# install build-essentials
 apt-get install build-essential -y
 
 # Disable root ssh login
 sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
 
-HOME_TIM='/home/tim'
-
 # Create a git directory and clone this repo
-mkdir -p /home/tim/git/dietpi-post-install/
-git clone https://github.com/timothymamo/dietpi-post-install.git ${HOME_TIM}/git/dietpi-post-install/
+mkdir -p ${HOME_USER}/git/dietpi-post-install/
+git clone ${HTTPS_REPO} ${HOME_USER}/git/dietpi-post-install/
 
-# Create symlinks for all files apart from the .git directory
-ln -s ${HOME_TIM}/git/dietpi-post-install/* ${HOME_TIM}
-ln -s ${HOME_TIM}/git/dietpi-post-install/.* ${HOME_TIM}
+# Create symlinks for all files
+ln -s ${HOME_USER}/git/dietpi-post-install/* ${HOME_USER}
+ln -s ${HOME_USER}/git/dietpi-post-install/.* ${HOME_USER}
 
-# Remove symlinks for .git and .env inbthe ${HOME} directory so any changes within ${HOME} don't get pushed to the repo
-rm -rf ${HOME_TIM}/.git ${HOME_TIM}/docker-compose/.env
+# Remove .git dierctory so any changes within ${HOME} don't get pushed to the repo
+rm -rf ${HOME_USER}/.git
 
-# Copy the .env file to the ${HOME} directory - this will be modified later but is needed to run docker compose
-cp -r ${HOME_TIM}/git/dietpi-post-install/docker-compose/.env ${HOME_TIM}/docker-compose/.env
+# Set zsh as the default shell for the ${USER}
+command -v zsh | tee -a /etc/shells
+chsh -s "$(command -v zsh)" ${USER_SCRIPT}
 
-chown -R tim:tim /home/tim
+# Restart sshd
+systemctl restart sshd
+
+# Setup Docker to have the appropriate permissions and restart
+usermod -aG docker ${USER_SCRIPT}
+systemctl enable docker
+
+chown -R ${USER_SCRIPT}:${USER_SCRIPT} ${HOME_USER}
