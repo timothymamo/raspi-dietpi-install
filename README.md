@@ -38,14 +38,18 @@ Place the microSD card in the RaspberryPi and plug it in. Wait for the system to
 
 # Setup DietPi
 
-Log in as `tim` and set a password by running:
+Log in as `tim` and modify the `docker-compose/.env` file.
+
 ```bash
-sudo passwd tim
+nano ${HOME}/docker-compose/.env
 ```
 
-Change the passwords and ip settings within the `docker-compose/.env` file and restart docker compose by running:
+Run the `install.sh` script:
 ```bash
-cd ${HOME}/docker-compose && docker compose restart
+./install.sh
 ```
 
-Check that everything is running as it should be by running the alias command `dps`.
+The script will ask you to set a new password for the user as swell as asking you to enter the password whenever a sudo command is required.
+Once the script finishes the system will reboot.
+
+Re-login, now you should be running `zsh` with `starship` for your prompt, and check that everything is running as it should be by running the alias command `dps`.

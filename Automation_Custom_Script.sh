@@ -38,9 +38,13 @@ echo "Symlinking repo into ${HOME_USER}"
 ln -s ${HOME_USER}/git/dietpi-post-install/* ${HOME_USER}
 ln -s ${HOME_USER}/git/dietpi-post-install/.* ${HOME_USER}
 
-# Remove .git dierctory so any changes within ${HOME} don't get pushed to the repo
+# Remove .git directory so any changes within ${HOME} don't get pushed to the repo
 echo "Symlinking .git directory within ${HOME_USER}"
 rm -rf ${HOME_USER}/.git
+
+# Create a ${HOME}/docker-compose/.env file from ${HOME}/docker-compose/.env-sample
+echo "Creating a ${HOME_USER}/docker-compose/.env file"
+cp -r ${HOME_USER}/docker-compose/.env-sample ${HOME_USER}/docker-compose/.env
 
 # Restart sshd
 echo "Restarting sshd"

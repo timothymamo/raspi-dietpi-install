@@ -1,1 +1,2 @@
 pihole/etc-pihole/
+docker-compose/.env
