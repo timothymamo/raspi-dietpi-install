@@ -16,9 +16,11 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 brew bundle
 brew install --cask font-fira-code-nerd-font
 
+export PATH=/home/linuxbrew/.linuxbrew/bin:$PATH
+
 # Set zsh as the default shell for the ${USER}
 echo "Settign zsh as default shell for ${USER_SCRIPT}"
-command -v zsh | tee -a /etc/shells
+command -v zsh | sudo tee -a /etc/shells
 chsh -s "$(command -v zsh)" ${USER_SCRIPT}
 
 # Start the containers
