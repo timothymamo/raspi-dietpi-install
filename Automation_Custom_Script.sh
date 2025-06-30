@@ -11,7 +11,9 @@ echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
 HOME_TIM='/home/tim'
 
+echo "Got here"
 su tim
+echo "Got here 2"
 
 # Change directory to $[HOME]
 pushd ${HOME_TIM}
