@@ -7,10 +7,6 @@ pushd ${HOME}
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo apt-get install build-essential -y
 
-# Create a git directory and clone this repo
-mkdir git
-git clone https://github.com/timothymamo/dietpi-post-install.git "${HOME}/git/dietpi-post-install/"
-
 # Set brew in shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
