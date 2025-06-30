@@ -29,9 +29,6 @@ brew install --cask font-fira-code-nerd-font
 command -v zsh | sudo tee -a /etc/shells
 sudo chsh -s "$(command -v zsh)" ${USER}
 
-# Disable root ssh login
-sudo sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
-
 # Restart sshd
 sudo systemctl restart sshd
 
