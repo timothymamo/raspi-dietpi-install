@@ -1,27 +1,25 @@
 #!/bin/bash
 
-# adduser --disabled-password --gecos "" tim
-# usermod -aG sudo tim
-# passwd -d tim
+adduser --disabled-password --gecos "" tim
+usermod -aG sudo tim
+passwd -d tim
 
-# cp -r /root/.ssh/ /home/tim
-# chown -R tim:tim /home/tim/.ssh
+cp -r /root/.ssh/ /home/tim
+chown -R tim:tim /home/tim/.ssh
 
-# echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
+echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
-# # Change User
-# su tim
-
+sudo -u tim bash<<_
 # Change directory to $[HOME]
 pushd ${HOME}
 
-#Install Homebrew
+# Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo apt-get install build-essential -y
 
 # Create a git directory and clone this repo
-#mkdir git
-#git clone https://github.com/timothymamo/dietpi-post-install.git "${HOME}/git/dietpi-post-install/"
+mkdir git
+git clone https://github.com/timothymamo/dietpi-post-install.git "${HOME}/git/dietpi-post-install/"
 
 # Set brew in shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
@@ -34,7 +32,7 @@ ln -s ${HOME}/git/dietpi-post-install/.* ${HOME}
 rm -rf ${HOME}/.git ${HOME}/docker-compose/.env
 
 # Copy the .env file to the ${HOME} directory - this will be modified later but is needed to run docker compose
-cp ${HOME}/git/dietpi-post-install/ ${HOME}/docker-compose/.env
+cp -r ${HOME}/git/dietpi-post-install/docker-compose/.env ${HOME}/docker-compose/.env
 
 # Install everything with the Brewfile
 brew bundle
@@ -53,7 +51,6 @@ sudo systemctl restart sshd
 
 # Setup Docker to have the appropriate permissions
 sudo usermod -aG docker ${USER}
-newgrp docker
 sudo systemctl enable docker
 pushd ${HOME}/docker-compose
 docker compose up -d
@@ -61,3 +58,4 @@ docker compose up -d
 # Wait for 2 minutes before rebooting the system
 sleep 120
 sudo poweroff --reboot
+_
