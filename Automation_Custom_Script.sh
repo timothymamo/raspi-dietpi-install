@@ -1,30 +1,27 @@
 #!/bin/bash
 
-adduser --disabled-password --gecos "" tim
-usermod -aG sudo tim
-passwd -d tim
+# adduser --disabled-password --gecos "" tim
+# usermod -aG sudo tim
+# passwd -d tim
 
-cp -r /root/.ssh/ /home/tim
-chown -R tim:tim /home/tim/.ssh
+# cp -r /root/.ssh/ /home/tim
+# chown -R tim:tim /home/tim/.ssh
 
-echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
+# echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
 
-# Change User
-su tim
+# # Change User
+# su tim
 
 # Change directory to $[HOME]
 cd "${HOME}"
-
-# Create a key for user tim
-ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "${USER}@${HOSTNAME}"
 
 #Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 sudo apt-get install build-essential -y
 
 # Create a git directory and clone this repo
-mkdir git
-git clone git@github.com:timothymamo/dietpi-post-install.git "${HOME}/git/"
+#mkdir git
+#git clone https://github.com/timothymamo/dietpi-post-install.git "${HOME}/git/dietpi-post-install/"
 
 # Set brew in shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
