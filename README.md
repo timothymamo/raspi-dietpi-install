@@ -14,8 +14,8 @@ AUTO_SETUP_NET_WIFI_ENABLED=1
 AUTO_SETUP_NET_HOSTNAME=DietPi<Name>
 # Disable HDMI/video output
 AUTO_SETUP_HEADLESS=1
-# Run the custom script after dietpi has finished setting up
-AUTO_SETUP_CUSTOM_SCRIPT_EXEC=0
+# Add url to custom script - runs after dietpi has finished setting up
+AUTO_SETUP_CUSTOM_SCRIPT_EXEC=<url-to-script>
 # Set OpenSSH as the SSH server
 AUTO_SETUP_SSH_SERVER_INDEX=-2
 # Set the public key for the root and dietpi users
