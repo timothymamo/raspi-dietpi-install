@@ -44,7 +44,7 @@ rm -rf ${HOME_USER}/.git
 
 # Create a ${HOME}/docker-compose/.env file from ${HOME}/docker-compose/.env-sample
 echo "Creating a ${HOME_USER}/docker-compose/.env file"
-cp -r ${HOME_USER}/docker-compose/.env-sample ${HOME_USER}/docker-compose/.env
+cp -r ${HOME_USER}/docker-compose/.env-example ${HOME_USER}/docker-compose/.env
 
 # Restart sshd
 echo "Restarting sshd"
