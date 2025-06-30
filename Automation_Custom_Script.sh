@@ -12,7 +12,7 @@ echo 'tim ALL=(ALL:ALL) ALL' >> /etc/sudoers
 HOME_TIM='/home/tim'
 
 echo "Got here"
-su tim
+su - tim /bin/bash << EOF
 echo "Got here 2"
 
 # Change directory to $[HOME]
@@ -63,3 +63,4 @@ docker compose up -d
 # Wait for 2 minutes before rebooting the system
 sleep 120
 sudo poweroff --reboot
+EOF
