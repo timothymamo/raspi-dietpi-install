@@ -13,7 +13,7 @@
 # su tim
 
 # Change directory to $[HOME]
-cd "${HOME}"
+cd ${HOME}
 
 #Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -27,14 +27,14 @@ sudo apt-get install build-essential -y
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 # Create symlinks for all files apart from the .git directory
-ln -s "${HOME}/git/dietpi-post-install/*" "${HOME}"
-ln -s "${HOME}/git/dietpi-post-install/.*" "${HOME}"
+ln -s ${HOME}/git/dietpi-post-install/* ${HOME}
+ln -s ${HOME}/git/dietpi-post-install/.* ${HOME}
 
 # Remove symlinks for .git and .env inbthe ${HOME} directory so any changes within ${HOME} don't get pushed to the repo
-rm -rf "${HOME}/.git" "${HOME}/docker-compose/.env"
+rm -rf ${HOME}/.git ${HOME}/docker-compose/.env
 
 # Copy the .env file to the ${HOME} directory - this will be modified later but is needed to run docker compose
-cp "${HOME}/git/dietpi-post-install/" "${HOME}/docker-compose/.env"
+cp ${HOME}/git/dietpi-post-install/ ${HOME}/docker-compose/.env
 
 # Install everything with the Brewfile
 brew bundle
@@ -43,16 +43,16 @@ brew install --cask font-fira-code-nerd-font
 
 # Set zsh as the default shell for the ${USER}
 command -v zsh | sudo tee -a /etc/shells
-sudo chsh -s "$(command -v zsh)" "${USER}"
+sudo chsh -s "$(command -v zsh)" ${USER}
 
 # Disable root ssh login
-sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
+sudo sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
 
 # Restart sshd
 sudo systemctl restart sshd
 
 # Setup Docker to have the appropriate permissions
-sudo usermod -aG docker "${USER}"
+sudo usermod -aG docker ${USER}
 newgrp docker
 sudo systemctl enable docker
 cd docker-compose
