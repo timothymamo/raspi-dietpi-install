@@ -1,0 +1,46 @@
+format = """
+$username\
+$hostname\
+$shlvl\
+$directory\
+$git_branch\
+$git_commit\
+$git_state\
+$git_metrics\
+$git_status\
+$package\
+$golang\
+$java\
+$nodejs\
+$python\
+$env_var\
+$custom\
+$cmd_duration\
+$line_break\
+$jobs\
+$battery\
+$status\
+$shell\
+$character"""
+
+# Inserts a blank line between shell prompts
+add_newline = true
+
+[jobs]
+disabled = true
+
+[username]
+style_user = "white bold"
+style_root = "red bold"
+format = "[$user]($style) "
+disabled = false
+show_always = true
+
+[hostname]
+ssh_only = true
+format =  "at [$hostname]($style) "
+style = "bold green"
+disabled = false
+
+[directory]
+format = "in [$path]($style) "

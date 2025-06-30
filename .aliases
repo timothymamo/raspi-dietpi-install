@@ -1,0 +1,22 @@
+mkcd() { mkdir -p $1; cd $1 }
+
+# Git
+alias ga='git add'
+alias gl='git pull'
+alias gp='git push'
+alias gcmsg='git add .; git commit -m'
+alias gst='git status'
+
+# Docker
+alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.RunningFor}}\t{{.Status}}\t{{.Names}}"'
+alias dcpll='cd ${HOME}/docker-compose/; docker-compose pull'
+alias dcup='cd ${HOME}/docker-compose/; docker-compose up -d'
+alias dcrs='cd ${HOME}/docker-compose/; docker-compose restart'
+alias banner='/boot/dietpi/func/dietpi-banner 1'
+
+# SSH
+alias ssh_nuc="ssh -i ~/.ssh/id_ed25519  tim@server.home"
+alias ssh_asus="ssh -i ~/.ssh/id_rsa The_Force@router.asus.com"
+
+# Misc
+alias ls='ls --color=auto'
