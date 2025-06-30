@@ -13,7 +13,7 @@
 # su tim
 
 # Change directory to $[HOME]
-cd ${HOME}
+pushd ${HOME}
 
 #Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -55,7 +55,7 @@ sudo systemctl restart sshd
 sudo usermod -aG docker ${USER}
 newgrp docker
 sudo systemctl enable docker
-cd docker-compose
+pushd ${HOME}/docker-compose
 docker compose up -d
 
 # Wait for 2 minutes before rebooting the system
