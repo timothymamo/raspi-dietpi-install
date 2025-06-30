@@ -44,11 +44,6 @@ ln -s ${HOME_USER}/git/dietpi-post-install/.* ${HOME_USER}
 echo "Symlinking .git directory within ${HOME_USER}"
 rm -rf ${HOME_USER}/.git
 
-# Set zsh as the default shell for the ${USER}
-echo "Settign zsh as default shell for ${USER_SCRIPT}"
-command -v zsh | tee -a /etc/shells
-chsh -s "$(command -v zsh)" ${USER_SCRIPT}
-
 # Restart sshd
 echo "Restarting sshd"
 systemctl restart sshd
