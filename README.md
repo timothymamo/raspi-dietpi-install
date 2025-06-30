@@ -34,7 +34,6 @@ aWIFI_SSID[0]='<SSID>'
 aWIFI_KEY[0]='<SSID_password>'
 ```
 
-Move the file `Automation_Custom_Script.sh` within the top level directory of the microSD card.
 Place the microSD card in the RaspberryPi and plug it in. Wait for the system to install itself (the front LED will stop flashing when its done).
 
 # Setup DietPi

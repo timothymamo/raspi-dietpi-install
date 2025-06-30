@@ -33,7 +33,7 @@ eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 ln -s "${HOME}/git/dietpi-post-install/*" "${HOME}"
 ln -s "${HOME}/git/dietpi-post-install/.*" "${HOME}"
 
-# Remove symlinks for .git and .env inbthe ${HOME} directory
+# Remove symlinks for .git and .env inbthe ${HOME} directory so any changes within ${HOME} don't get pushed to the repo
 rm -rf "${HOME}/.git" "${HOME}/docker-compose/.env"
 
 # Copy the .env file to the ${HOME} directory - this will be modified later but is needed to run docker compose
