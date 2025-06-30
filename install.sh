@@ -9,16 +9,6 @@ NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Ho
 # Set brew in shell
 eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-# Create symlinks for all files apart from the .git directory
-ln -s ${HOME}/git/dietpi-post-install/* ${HOME}
-ln -s ${HOME}/git/dietpi-post-install/.* ${HOME}
-
-# Remove symlinks for .git and .env inbthe ${HOME} directory so any changes within ${HOME} don't get pushed to the repo
-rm -rf ${HOME}/.git ${HOME}/docker-compose/.env
-
-# Copy the .env file to the ${HOME} directory - this will be modified later but is needed to run docker compose
-cp -r ${HOME}/git/dietpi-post-install/docker-compose/.env ${HOME}/docker-compose/.env
-
 # Install everything with the Brewfile
 brew bundle
 
