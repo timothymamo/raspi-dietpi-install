@@ -20,6 +20,5 @@ brew install --cask font-fira-code-nerd-font
 pushd ${HOME}/docker-compose
 docker compose up -d
 
-# Wait for 2 minutes before rebooting the system
-sleep 120
+# Reboot the system
 sudo poweroff --reboot
