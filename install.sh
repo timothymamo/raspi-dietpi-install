@@ -4,7 +4,7 @@
 pushd ${HOME}
 
 # Crate a password for the user
-passwd ${USER}
+sudo passwd ${USER}
 
 # Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"

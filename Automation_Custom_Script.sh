@@ -16,8 +16,6 @@ adduser --disabled-password --gecos "" ${USER_SCRIPT}
 usermod -aG sudo ${USER_SCRIPT}
 passwd -d ${USER_SCRIPT}
 
-echo "${USER_SCRIPT} ALL=(ALL:ALL) ALL" >> /etc/sudoers
-
 # Copy the .ssh directory
 echo "Copying SSH keys"
 cp -r /root/.ssh/ ${HOME_USER}
