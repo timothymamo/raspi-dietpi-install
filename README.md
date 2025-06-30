@@ -49,7 +49,7 @@ Run the `install.sh` script:
 ./install.sh
 ```
 
-The script will ask you to set a new password for the user as swell as asking you to enter the password whenever a sudo command is required.
+The script will ask you to set a new password for the user as well as asking you to enter the password whenever a sudo command is required.
 Once the script finishes the system will reboot.
 
 Re-login, now you should be running `zsh` with `starship` for your prompt, and check that everything is running as it should be by running the alias command `dps`.
