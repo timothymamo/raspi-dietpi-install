@@ -23,6 +23,7 @@ cp -r /root/.ssh/ ${HOME_USER}
 # install build-essentials
 echo "Installing Build Essentials"
 apt-get install build-essential -y
+apt-get install dnsutils -y
 
 # Disable root ssh login
 echo "Disabling Root login"
