@@ -1,0 +1,5 @@
+{
+  "schedule": ["after 10am and before 5pm on sunday"],
+  "prHourlyLimit": 0,
+  "extends": ["config:base"]
+}
