@@ -4,6 +4,9 @@
 pushd ${HOME}
 
 sudo ssh-keygen -a 100 -t ed25519 -f ~/.ssh/id_ed25519 -C "${USER}@${HOST}"
+echo "host github.com
+ HostName github.com
+ IdentityFile ~/.ssh/github_ed25519" > ${HOME}/.ssh/config
 
 # Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
