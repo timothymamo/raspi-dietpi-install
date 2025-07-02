@@ -48,12 +48,7 @@ cp -r ${HOME_USER}/docker-compose/.env-example ${HOME_USER}/docker-compose/.env
 
 # Download vim plugins
 mkdir -p ${HOME_USER}/.vim/plugged
-git clone --depth 1 https://github.com/airblade/vim-gitgutter.git ${HOME_USER}/.vim/plugged/vim-gitgutter
-git clone --depth 1 https://github.com/preservim/nerdtree.git ${HOME_USER}/.vim/plugged/nerdtree
-git clone --depth 1 https://github.com/vim-airline/vim-airline.git ${HOME_USER}/.vim/plugged/vim-airline
-git clone --depth 1 https://github.com/vim-airline/vim-airline-themes.git ${HOME_USER}/.vim/plugged/vim-airline-themes
-git clone --depth 1 https://github.com/tpope/vim-unimpaired.git ${HOME_USER}/.vim/plugged/vim-unimpaired
-
+curl -fLo ${HOME_USER}/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 
 # Restart sshd
 echo "Restarting sshd"

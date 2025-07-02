@@ -62,7 +62,7 @@ let NERDTreeShowHidden=1
 call plug#begin('~/.vim/plugged')
 
   Plug 'airblade/vim-gitgutter'                 " shows a git diff in the gutter
-  Plug 'scrooloose/nerdtree'                    " tree explorer
+  Plug 'preservim/nerdtree'                    " tree explorer
   Plug 'vim-airline/vim-airline'                " status/tabline
   Plug 'vim-airline/vim-airline-themes'         " status/tabline themes
   Plug 'tpope/vim-unimpaired'                   " pairs of handy bracket mappings
