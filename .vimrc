@@ -57,19 +57,19 @@ set wildignore=*.docx,*.jpg,*.png,*.gif,*.pdf,*.pyc,*.exe,*.flv,*.img,*.xlsx
 let g:airline_theme='deus'
 let NERDTreeShowHidden=1
 
-@REM " PLUGINS ---------------------------------------------------------------- {{{
+" PLUGINS ---------------------------------------------------------------- {{{
 
-@REM call plug#begin('~/.vim/plugged')
+call plug#begin('~/.vim/plugged')
 
-@REM   Plug 'airblade/vim-gitgutter'                 " shows a git diff in the gutter
-@REM   Plug 'scrooloose/nerdtree'                    " tree explorer
-@REM   Plug 'vim-airline/vim-airline'                " status/tabline
-@REM   Plug 'vim-airline/vim-airline-themes'         " status/tabline themes
-@REM   Plug 'tpope/vim-unimpaired'                   " pairs of handy bracket mappings
+  Plug 'airblade/vim-gitgutter'                 " shows a git diff in the gutter
+  Plug 'scrooloose/nerdtree'                    " tree explorer
+  Plug 'vim-airline/vim-airline'                " status/tabline
+  Plug 'vim-airline/vim-airline-themes'         " status/tabline themes
+  Plug 'tpope/vim-unimpaired'                   " pairs of handy bracket mappings
 
-@REM call plug#end()
+call plug#end()
 
-@REM " }}}
+" }}}
 
 " MAPPINGS --------------------------------------------------------------- {{{
 
