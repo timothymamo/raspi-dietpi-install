@@ -8,6 +8,10 @@ echo "host github.com
  HostName github.com
  IdentityFile ~/.ssh/id_ed25519" > ${HOME}/.ssh/config
 
+# Set docker autocompletion
+mkdir -p ${HOME}/.docker/completions
+docker completion zsh > ${HOME}/.docker/completions/_docker
+
 # Install Homebrew
 NONINTERACTIVE=1 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 

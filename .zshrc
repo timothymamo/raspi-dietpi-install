@@ -30,6 +30,10 @@ source /home/linuxbrew/.linuxbrew/opt/zsh-autosuggestions/share/zsh-autosuggesti
 
 source ~/.aliases
 
+FPATH="$HOME/.docker/completions:$FPATH"
+autoload -Uz compinit
+compinit
+
 autoload -Uz compinit && compinit
 
 autoload -U up-line-or-beginning-search
