@@ -8,29 +8,6 @@ echo "host github.com
  HostName github.com
  IdentityFile ~/.ssh/id_ed25519" > ${HOME}/.ssh/config
 
-echo "[init]
-	defaultBranch = main
-[user]
-	name = Tim Mamo
-	email = tim@dietpi${HOST}.home
-[color]
-	ui = true
-[color \"branch\"]
-	current = yellow reverse
-	local = yellow
-	remote = green
-[color \"diff\"]
-	meta = yellow bold
-	frag = magenta bold
-	old = red bold
-	new = green bold
-[color \"status\"]
-	added = yellow
-	changed = green
-	untracked = red
-[gui]
-	editor = vim" > ${HOME}/.gitconfig
-
 # Set docker autocompletion
 mkdir -p ${HOME}/.docker/completions
 docker completion zsh > ${HOME}/.docker/completions/_docker
@@ -55,6 +32,8 @@ chsh -s "$(command -v zsh)" ${USER}
 # Start the containers
 pushd ${HOME}/docker-compose
 docker compose up -d
+
+envsubst < ${HOME}/.gitconfig
 
 # Crate a password for the user
 sudo passwd ${USER}
