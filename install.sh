@@ -8,6 +8,12 @@ echo "host github.com
  HostName github.com
  IdentityFile ~/.ssh/id_ed25519" > ${HOME}/.ssh/config
 
+echo "[pull]
+	rebase = false
+[user]
+	name = Tim Mamo
+	email = tim@ndietpi${HOST}.home" > ${HOME}/.gitconfig
+
 # Set docker autocompletion
 mkdir -p ${HOME}/.docker/completions
 docker completion zsh > ${HOME}/.docker/completions/_docker
