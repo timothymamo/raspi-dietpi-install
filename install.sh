@@ -34,7 +34,7 @@ pushd ${HOME}/docker-compose
 docker compose up -d
 
 cp ${HOME}/.gitconfig-example ${HOME}/.gitconfig
-envsubst < ${HOME}/.gitconfig
+sed -i "s/HOST/${HOST}/g" ${HOME}/.gitconfig
 
 # Crate a password for the user
 sudo passwd ${USER}
