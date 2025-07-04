@@ -12,19 +12,19 @@ echo "[init]
 	defaultBranch = main
 [user]
 	name = Tim Mamo
-	email = tim@ndietpi${HOST}.home
+	email = tim@dietpi${HOST}.home
 [color]
 	ui = true
-[color "branch"]
+[color \"branch\"]
 	current = yellow reverse
 	local = yellow
 	remote = green
-[color "diff"]
+[color \"diff\"]
 	meta = yellow bold
 	frag = magenta bold
 	old = red bold
 	new = green bold
-[color "status"]
+[color \"status\"]
 	added = yellow
 	changed = green
 	untracked = red
