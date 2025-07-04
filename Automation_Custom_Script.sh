@@ -2,7 +2,7 @@
 
 # Set varibales"
 USER_SCRIPT="tim"
-HTTPS_REPO="https://github.com/timothymamo/dietpi-post-install.git"
+HTTPS_REPO="https://github.com/timothymamo/raspi-dietpi-install.git"
 
 HOME_USER="/home/${USER_SCRIPT}"
 
@@ -29,14 +29,14 @@ echo "Disabling Root login"
 sed -i '/#PermitRootLogin prohibit-password/c\PermitRootLogin no' /etc/ssh/sshd_config
 
 # Create a git directory and clone this repo
-echo "Clone repo into ${HOME_USER}/git/dietpi-post-install/"
-mkdir -p ${HOME_USER}/git/dietpi-post-install/
-git clone ${HTTPS_REPO} ${HOME_USER}/git/dietpi-post-install/
+echo "Clone repo into ${HOME_USER}/git/raspi-dietpi-install/"
+mkdir -p ${HOME_USER}/git/raspi-dietpi-install/
+git clone ${HTTPS_REPO} ${HOME_USER}/git/raspi-dietpi-install/
 
 # Create symlinks for all files
 echo "Symlinking repo into ${HOME_USER}"
-ln -s ${HOME_USER}/git/dietpi-post-install/* ${HOME_USER}
-ln -s ${HOME_USER}/git/dietpi-post-install/.* ${HOME_USER}
+ln -s ${HOME_USER}/git/raspi-dietpi-install/* ${HOME_USER}
+ln -s ${HOME_USER}/git/raspi-dietpi-install/.* ${HOME_USER}
 
 # Remove .git directory so any changes within ${HOME} don't get pushed to the repo
 echo "Symlinking .git directory within ${HOME_USER}"
