@@ -2,7 +2,7 @@
 	defaultBranch = main
 [user]
 	name = Tim Mamo
-	email = tim@$HOST.home
+	email = tim@HOST.home
 [color]
 	ui = true
 [color "branch"]
