@@ -33,6 +33,7 @@ chsh -s "$(command -v zsh)" ${USER}
 pushd ${HOME}/docker-compose
 docker compose up -d
 
+cp ${HOME}/.gitconfig-example ${HOME}/.gitconfig
 envsubst < ${HOME}/.gitconfig
 
 # Crate a password for the user
