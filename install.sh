@@ -8,11 +8,28 @@ echo "host github.com
  HostName github.com
  IdentityFile ~/.ssh/id_ed25519" > ${HOME}/.ssh/config
 
-echo "[pull]
-	rebase = false
+echo "[init]
+	defaultBranch = main
 [user]
 	name = Tim Mamo
-	email = tim@ndietpi${HOST}.home" > ${HOME}/.gitconfig
+	email = tim@ndietpi${HOST}.home
+[color]
+	ui = true
+[color "branch"]
+	current = yellow reverse
+	local = yellow
+	remote = green
+[color "diff"]
+	meta = yellow bold
+	frag = magenta bold
+	old = red bold
+	new = green bold
+[color "status"]
+	added = yellow
+	changed = green
+	untracked = red
+[gui]
+	editor = vim" > ${HOME}/.gitconfig
 
 # Set docker autocompletion
 mkdir -p ${HOME}/.docker/completions
