@@ -11,18 +11,28 @@ echo "Creating User: ${USER_SCRIPT}"
 echo "Home directory for ${USER_SCRIPT}: ${HOME_USER}"
 echo "Repo to clone: ${HTTPS_REPO}"
 
-# Create super user with no password
+# Add user as super user with no password (for now)
 adduser --disabled-password --gecos "" ${USER_SCRIPT}
 usermod -aG sudo ${USER_SCRIPT}
 passwd -d ${USER_SCRIPT}
 
-# Copy the .ssh directory
+# Copy the .ssh directory from root to ${HOME_USER} - this will allow you to ssh into the system as ${HOME_USER}
 echo "Copying SSH keys"
 cp -r /root/.ssh/ ${HOME_USER}
 
-# install build-essentials
-echo "Installing Build Essentials"
-apt-get install build-essential -y
+# Install Packages
+echo "Installing Packages"
+apt update && apt upgrade
+apt -y install \
+  build-essential \
+  vim \
+  zsh \
+  zsh-syntax-highlighting \
+  zsh-autosuggestions \
+  fonts-firacode
+
+# Install starship
+curl -sS https://starship.rs/install.sh | sh -s -- --yes --bin-dir /usr/bin
 
 # Disable root ssh login
 echo "Disabling Root login"

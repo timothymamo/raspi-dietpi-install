@@ -27,19 +27,15 @@ export EDITOR="vim"
 
 source /home/linuxbrew/.linuxbrew/opt/zsh-syntax-highlighting/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 source /home/linuxbrew/.linuxbrew/opt/zsh-autosuggestions/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+#source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source ~/.aliases
 
 FPATH="$HOME/.docker/completions:$FPATH"
-autoload -Uz compinit
-compinit
-
 autoload -Uz compinit && compinit
 
-autoload -U up-line-or-beginning-search
-autoload -U down-line-or-beginning-search
-zle -N up-line-or-beginning-search
-zle -N down-line-or-beginning-search
+zle -N up-line-or-search
+zle -N down-line-or-search
 
 zstyle ':completion:*' menu select
 
