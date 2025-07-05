@@ -55,3 +55,7 @@ The script will ask you to set a password for the ssh keys generated and a new p
 Once the script finishes the system will reboot.
 
 Re-login. You should now be running `zsh` as your shell with `starship` for your prompt. Check that the containers are running as they should be by running the alias command `dps`.
+
+Enable misc.etc_dnsmasq_d
+
+Set DNS > Interface settings > Permit all origins

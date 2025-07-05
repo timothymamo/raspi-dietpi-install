@@ -27,6 +27,7 @@ docker compose up --detach --wait --wait-timeout 30
 
 # Enable app_sudo for nebula-sync 
 sudo sed -i "s/app_sudo = false/app_sudo = true/g" ${HOME}/pihole/etc-pihole/pihole.toml
+sudo sed -i "s/listeningMode = \"LOCAL\"/listeningMode = \"ALL\"/g" ${HOME}/pihole/etc-pihole/pihole.toml
 
 # Crate a password for the user
 sudo passwd ${USER}
