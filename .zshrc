@@ -34,8 +34,8 @@ source ~/.aliases
 FPATH="$HOME/.docker/completions:$FPATH"
 autoload -Uz compinit && compinit
 
-zle -N up-line-or-search
-zle -N down-line-or-search
+bindkey "^[[A" history-beginning-search-backward
+bindkey "^[[B" history-beginning-search-forward
 
 zstyle ':completion:*' menu select
 
