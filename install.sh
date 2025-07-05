@@ -25,6 +25,9 @@ sed -i "s/HOST/${HOST}/g" ${HOME}/.gitconfig
 pushd ${HOME}/docker-compose
 docker compose up -d
 
+# Enable app_sudo for nebula-sync 
+sudo sed -i "s/app_sudo = false/app_sudo = true/g" ${HOME}/pihole/etc-pihole/pihole.toml
+
 # Crate a password for the user
 sudo passwd ${USER}
 

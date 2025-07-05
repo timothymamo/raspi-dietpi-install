@@ -1,4 +1,5 @@
 export PATH=/usr/bin:/boot/dietpi:/bin:/usr/sbin:/sbin:/home/linuxbrew/.linuxbrew/bin:$PATH
+#export PATH=/usr/bin:/boot/dietpi:/bin:/usr/sbin:/sbin:$PATH
 
 #set history size
 export HISTSIZE=1000000
