@@ -56,6 +56,9 @@ Once the script finishes the system will reboot.
 
 Re-login. You should now be running `zsh` as your shell with `starship` for your prompt. Check that the containers are running as they should be by running the alias command `dps`.
 
-Enable misc.etc_dnsmasq_d
+Once you've got everything setup you might want to add the following list to the primary pihole via the webUI in Lists (nebula-sync will sync the list to the rest of the piholes):
 
-Set DNS > Interface settings > Permit all origins
+`HaGeZi's Pro++ DNS Blocklist`
+```
+https://raw.githubusercontent.com/hagezi/dns-blocklists/main/domains/pro.plus.txt
+```
