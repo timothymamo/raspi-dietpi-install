@@ -35,7 +35,7 @@ aWIFI_SSID[0]='<SSID>'
 aWIFI_KEY[0]='<SSID_password>'
 ```
 
-Place the microSD card in the RaspberryPi and plug it in. Wait for the system to install itself (the front LED will stop flashing when its done, on a RasPi 5 this is about 7 min).
+Place the microSD card in the RaspberryPi and plug it in. Wait for the system to install itself (the front LED will stop flashing when its done, on a RasPi 5 2GB this is about 7 min).
 You can logs for the automated script within `/var/tmp/dietpi/logs/dietpi-automation_custom_script.log` once you login.
 
 # Setup DietPi
