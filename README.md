@@ -36,6 +36,7 @@ aWIFI_KEY[0]='<SSID_password>'
 ```
 
 Place the microSD card in the RaspberryPi and plug it in. Wait for the system to install itself (the front LED will stop flashing when its done).
+You can logs for the automated script within `/var/tmp/dietpi/logs/dietpi-automation_custom_script.log` once you login.
 
 # Setup DietPi
 
