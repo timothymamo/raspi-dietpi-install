@@ -49,7 +49,7 @@ ln -s ${HOME_USER}/git/raspi-dietpi-install/* ${HOME_USER}
 ln -s ${HOME_USER}/git/raspi-dietpi-install/.* ${HOME_USER}
 
 # Remove .git directory so any changes within ${HOME} don't get pushed to the repo
-echo "Symlinking .git directory within ${HOME_USER}"
+echo "Removing symlink for .git directory within ${HOME_USER}"
 rm -rf ${HOME_USER}/.git
 
 # Create a ${HOME}/docker-compose/.env file from ${HOME}/docker-compose/.env-sample
