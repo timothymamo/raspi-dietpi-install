@@ -25,6 +25,7 @@ echo "Installing Packages"
 apt update && apt upgrade
 apt -y install \
   build-essential \
+  mailutils \
   vim \
   zsh \
   zsh-syntax-highlighting \

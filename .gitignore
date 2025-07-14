@@ -1,2 +1,5 @@
+# Ignore htop output
+.config/htop
+
 pihole/etc-pihole/
 docker-compose/.env
