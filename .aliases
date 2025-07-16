@@ -19,6 +19,7 @@ alias ssh_asus="ssh -i ~/.ssh/id_rsa The_Force@router.asus.com"
 
 # Misc
 alias ls='ls --color=auto'
+alias cdg='cd ${HOME}/git/raspi-dietpi-install'
 
 # DietPi aliases
 alias 1337='echo "Indeed, you are =)"'
