@@ -41,6 +41,6 @@ services:
       - PRIMARY=${PRIMARY}
       - REPLICAS=${REPLICAS}
       - FULL_SYNC=true
-      - RUN_GRAVITY=true
+      - RUN_GRAVITY=false
       - CRON=0 * * * *
     restart: unless-stopped
