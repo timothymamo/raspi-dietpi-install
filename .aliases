@@ -9,9 +9,9 @@ alias gst='git status'
 
 # Docker
 alias dps='docker ps --format "table {{.ID}}\t{{.Image}}\t{{.RunningFor}}\t{{.Status}}\t{{.Names}}"'
-alias dcup='cd ${HOME}/docker-compose/; git pull; docker compose up -d'
+alias dcup='cd ${HOME}/docker-compose/; git pull; docker compose up -d --remove-orphans'
 alias dcrs='cd ${HOME}/docker-compose/; docker compose restart'
-alias banner='/boot/dietpi/func/dietpi-banner 1'
+alias dclean='docker system prune --all --volumes --force; docker volume prune --all --force'
 
 # SSH
 alias ssh_nuc="ssh -i ~/.ssh/id_ed25519  tim@server.home"
@@ -22,6 +22,7 @@ alias ls='ls --color=auto'
 alias cdg='cd ${HOME}/git/raspi-dietpi-install'
 
 # DietPi aliases
+alias banner='/boot/dietpi/func/dietpi-banner 1'
 alias 1337='echo "Indeed, you are =)"'
 alias cpu='/boot/dietpi/dietpi-cpuinfo'
 alias dietpi-autostart='/boot/dietpi/dietpi-autostart'
