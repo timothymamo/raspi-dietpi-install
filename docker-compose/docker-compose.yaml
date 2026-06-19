@@ -55,7 +55,16 @@ services:
     environment:
       - TZ=Netherlands/Amsterdam
     volumes:
-      - /home/tim/fail2ban/config:/data
+      - /home/tim/fail2ban:/data
+      - ./services/fail2ban/jail.d/sshd.local:/data/jail.d/sshd.local:ro
+      - ./services/fail2ban/jail.d/traefik-auth.local:/data/jail.d/traefik-auth.local:ro
+      - ./services/fail2ban/jail.d/traefik-botsearch.local:/data/jail.d/traefik-botsearch.local:ro
+      # Custom filter - not bundled in this image, see the file for why.
+      - ./services/fail2ban/filter.d/traefik-botsearch.local:/data/filter.d/traefik-botsearch.local:ro
+      # Expose the socket directory to the host so fail2ban-ui can reach it.
+      # The socket is created inside the container; without this mount it
+      # never appears on the host and fail2ban-ui's bind mount points at nothing.
+      - /home/tim/fail2ban-run:/var/run/fail2ban
       - /var/log:/var/log:ro
     restart: unless-stopped
 
@@ -66,7 +75,12 @@ services:
       - TZ=Netherlands/Amsterdam
       - FAIL2BAN_SOCKET=/data/run/fail2ban.sock
     volumes:
-      - /home/tim/fail2ban/config:/data
+      # Read the fail2ban database to display ban history
+      - /home/tim/fail2ban:/data
+      # Same host directory as fail2ban's /var/run/fail2ban mount — Docker
+      # can't bind-mount a socket file that doesn't exist yet, so mount the
+      # whole directory and let fail2ban create the socket inside it.
+      - /home/tim/fail2ban-run:/var/run/fail2ban
     networks:
       - proxy
     labels:
