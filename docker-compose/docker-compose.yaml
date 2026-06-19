@@ -39,6 +39,10 @@ services:
       - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_HOST}`)"
       - "traefik.http.routers.pihole.entrypoints=web"
       - "traefik.http.services.pihole.loadbalancer.server.port=80"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.regex=^http://([^/]+)/?$$"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.replacement=http://$${1}/admin"
+      - "traefik.http.middlewares.pihole-redirect.redirectregex.permanent=true"
+      - "traefik.http.routers.pihole.middlewares=pihole-redirect"
     restart: unless-stopped
 
   fail2ban:
