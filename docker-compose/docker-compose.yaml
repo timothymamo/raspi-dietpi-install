@@ -10,7 +10,7 @@ services:
       - "--entrypoints.web.address=:80"
     labels:
       - "traefik.enable=true"
-      - "traefik.http.routers.traefik.rule=Host(`${PIHOLE_HOST}`)"
+      - "traefik.http.routers.traefik.rule=Host(`${TRAEFIK_HOST}`)"
       - "traefik.http.routers.traefik.entrypoints=web"
       - "traefik.http.routers.traefik.service=api@internal"
     ports:
