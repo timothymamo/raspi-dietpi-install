@@ -1,5 +1,22 @@
 services:
 
+  traefik:
+    image: traefik:v3.7.5
+    container_name: traefik
+    command:
+      - "--api.insecure=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+    ports:
+      - "80:80"
+      - "8080:8080"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock:ro"
+    networks:
+      - proxy
+    restart: unless-stopped
+
   pihole:
     container_name: pihole
     image: pihole/pihole:2026.05.0
@@ -8,17 +25,20 @@ services:
       - 53:53/tcp
       - 53:53/udp
       - 67:67/udp
-      - 80:80/tcp
-      - 443:443/tcp
     environment:
       - TZ=Netherlands/Amsterdam
       - FTLCONF_webserver_api_password=${PIHOLE_PASSWORD}
       - FTLCONF_dns_upstreams=1.1.1.1;1.0.0.1
-      - FTLCONF_webserver_paths_webhome="/"
-      - VIRTUAL_PORT=80
     volumes:
       - /home/tim/pihole/etc-pihole/:/etc/pihole/
       - /home/tim/pihole/etc-dnsmasq.d/:/etc/dnsmasq.d/
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.pihole.rule=Host(`${PIHOLE_HOST}`)"
+      - "traefik.http.routers.pihole.entrypoints=web"
+      - "traefik.http.services.pihole.loadbalancer.server.port=80"
     restart: unless-stopped
 
   fail2ban:
@@ -35,6 +55,23 @@ services:
       - /var/log:/var/log:ro
     restart: unless-stopped
 
+  fail2ban-ui:
+    image: swissmakers/fail2ban-ui:latest
+    container_name: fail2ban-ui
+    environment:
+      - TZ=Netherlands/Amsterdam
+      - FAIL2BAN_SOCKET=/data/run/fail2ban.sock
+    volumes:
+      - /home/tim/fail2ban/config:/data
+    networks:
+      - proxy
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.fail2ban-ui.rule=Host(`${FAIL2BAN_HOST}`)"
+      - "traefik.http.routers.fail2ban-ui.entrypoints=web"
+      - "traefik.http.services.fail2ban-ui.loadbalancer.server.port=8080"
+    restart: unless-stopped
+
   nebula-sync:
     image: ghcr.io/lovelaze/nebula-sync:v0.11.2
     container_name: nebula-sync
@@ -45,3 +82,7 @@ services:
       - RUN_GRAVITY=false
       - CRON=0 * * * *
     restart: unless-stopped
+
+networks:
+  proxy:
+    driver: bridge
