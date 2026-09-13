@@ -27,7 +27,7 @@ services:
       - 67:67/udp
       - 8081:80
     environment:
-      - TZ=Netherlands/Amsterdam
+      - TZ=Europe/Amsterdam
       - FTLCONF_webserver_api_password=${PIHOLE_PASSWORD}
       - FTLCONF_dns_upstreams=1.1.1.1;1.0.0.1
     volumes:
@@ -54,7 +54,7 @@ services:
       - NET_RAW
     network_mode: host
     environment:
-      - TZ=Netherlands/Amsterdam
+      - TZ=Europe/Amsterdam
     volumes:
       - /home/tim/fail2ban:/data
       - ./service/fail2ban/jail.d/sshd.local:/data/jail.d/sshd.local:ro
@@ -73,7 +73,7 @@ services:
     image: swissmakers/fail2ban-ui:latest
     container_name: fail2ban-ui
     environment:
-      - TZ=Netherlands/Amsterdam
+      - TZ=Europe/Amsterdam
       - FAIL2BAN_SOCKET=/data/run/fail2ban.sock
     volumes:
       # Read the fail2ban database to display ban history
