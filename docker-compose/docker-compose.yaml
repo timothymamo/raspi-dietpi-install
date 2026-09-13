@@ -57,11 +57,11 @@ services:
       - TZ=Netherlands/Amsterdam
     volumes:
       - /home/tim/fail2ban:/data
-      - ./services/fail2ban/jail.d/sshd.local:/data/jail.d/sshd.local:ro
-      - ./services/fail2ban/jail.d/traefik-auth.local:/data/jail.d/traefik-auth.local:ro
-      - ./services/fail2ban/jail.d/traefik-botsearch.local:/data/jail.d/traefik-botsearch.local:ro
+      - ./service/fail2ban/jail.d/sshd.local:/data/jail.d/sshd.local:ro
+      - ./service/fail2ban/jail.d/traefik-auth.local:/data/jail.d/traefik-auth.local:ro
+      - ./service/fail2ban/jail.d/traefik-botsearch.local:/data/jail.d/traefik-botsearch.local:ro
       # Custom filter - not bundled in this image, see the file for why.
-      - ./services/fail2ban/filter.d/traefik-botsearch.local:/data/filter.d/traefik-botsearch.local:ro
+      - ./service/fail2ban/filter.d/traefik-botsearch.local:/data/filter.d/traefik-botsearch.local:ro
       # Expose the socket directory to the host so fail2ban-ui can reach it.
       # The socket is created inside the container; without this mount it
       # never appears on the host and fail2ban-ui's bind mount points at nothing.
