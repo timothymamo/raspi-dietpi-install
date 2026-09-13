@@ -26,6 +26,7 @@ apt update && apt upgrade
 apt -y install \
   build-essential \
   mailutils \
+  rsyslog \
   vim \
   zsh \
   zsh-syntax-highlighting \
@@ -70,6 +71,10 @@ git clone --depth 1 https://github.com/tpope/vim-unimpaired.git ${HOME_USER}/.vi
 # Restart sshd
 echo "Restarting sshd"
 systemctl restart sshd
+
+# Enable rsyslog so fail2ban's sshd jail has /var/log/auth.log to read
+echo "Enabling rsyslog"
+systemctl enable --now rsyslog
 
 # Setup Docker to have the appropriate permissions and restart
 echo "Setting up Docker user and permissions"

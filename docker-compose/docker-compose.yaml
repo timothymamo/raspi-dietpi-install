@@ -8,11 +8,16 @@ services:
       - "--providers.docker=true"
       - "--providers.docker.exposedbydefault=false"
       - "--entrypoints.web.address=:80"
+      - "--accesslog=true"
+      - "--accesslog.filepath=/var/log/traefik/access.log"
     ports:
       - "80:80"
       - "8080:8080"
     volumes:
       - "/var/run/docker.sock:/var/run/docker.sock:ro"
+      # Written to a host path under /var/log so fail2ban's /var/log:/var/log:ro
+      # mount picks it up for the traefik-auth and traefik-botsearch jails.
+      - "/var/log/traefik:/var/log/traefik"
     networks:
       - proxy
     restart: unless-stopped
