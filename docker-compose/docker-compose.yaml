@@ -75,7 +75,7 @@ services:
     restart: unless-stopped
 
   fail2ban-ui:
-    image: swissmakers/fail2ban-ui:v1.5.4
+    image: swissmakers/fail2ban-ui:v1.6.0
     container_name: fail2ban-ui
     environment:
       - TZ=Europe/Amsterdam
