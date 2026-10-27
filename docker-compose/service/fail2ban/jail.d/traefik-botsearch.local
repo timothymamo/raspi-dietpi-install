@@ -3,6 +3,9 @@
 [traefik-botsearch]
 enabled = true
 port = http,https
+# Same as traefik-auth: Docker-published traffic only passes DOCKER-USER.
+banaction = iptables-multiport
+chain = DOCKER-USER
 logpath = /var/log/traefik/access.log
 maxretry = 2
 findtime = 10m

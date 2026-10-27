@@ -3,6 +3,11 @@
 [traefik-auth]
 enabled = true
 port = http,https
+# Traefik's ports are Docker-published, so its traffic is DNAT'd through
+# FORWARD and never hits INPUT - ban in DOCKER-USER instead. Pinned to
+# iptables because the nftables actions only hook input, whatever the chain.
+banaction = iptables-multiport
+chain = DOCKER-USER
 logpath = /var/log/traefik/access.log
 maxretry = 5
 findtime = 10m
