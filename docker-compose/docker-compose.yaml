@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
 
   fail2ban:
-    image: crazymax/fail2ban:1.1.1
+    image: lscr.io/linuxserver/fail2ban:1.1.0-r2-ls47
     container_name: fail2ban
     cap_add:
       - NET_ADMIN
@@ -61,12 +61,16 @@ services:
     environment:
       - TZ=Europe/Amsterdam
     volumes:
-      - /home/tim/fail2ban:/data
-      - ./service/fail2ban/jail.d/sshd.local:/data/jail.d/sshd.local:ro
-      - ./service/fail2ban/jail.d/traefik-auth.local:/data/jail.d/traefik-auth.local:ro
-      - ./service/fail2ban/jail.d/traefik-botsearch.local:/data/jail.d/traefik-botsearch.local:ro
+      # The image copies the full stock config tree into /config/fail2ban and
+      # symlinks /etc/fail2ban to it. fail2ban-ui mounts the same host directory
+      # as its /etc/fail2ban so it can write the managed jail.local and its
+      # ui-custom-action callback where this container actually reads them.
+      - /home/tim/fail2ban-config:/config
+      - ./service/fail2ban/jail.d/sshd.local:/config/fail2ban/jail.d/sshd.local:ro
+      - ./service/fail2ban/jail.d/traefik-auth.local:/config/fail2ban/jail.d/traefik-auth.local:ro
+      - ./service/fail2ban/jail.d/traefik-botsearch.local:/config/fail2ban/jail.d/traefik-botsearch.local:ro
       # Custom filter - not bundled in this image, see the file for why.
-      - ./service/fail2ban/filter.d/traefik-botsearch.local:/data/filter.d/traefik-botsearch.local:ro
+      - ./service/fail2ban/filter.d/traefik-botsearch.local:/config/fail2ban/filter.d/traefik-botsearch.local:ro
       # Expose the socket directory to the host so fail2ban-ui can reach it.
       # The socket is created inside the container; without this mount it
       # never appears on the host and fail2ban-ui's bind mount points at nothing.
@@ -79,14 +83,31 @@ services:
     container_name: fail2ban-ui
     environment:
       - TZ=Europe/Amsterdam
-      - FAIL2BAN_SOCKET=/data/run/fail2ban.sock
+      # fail2ban runs on the host network, so its ban/unban callbacks need a
+      # host-reachable address - the default 127.0.0.1:8080 is Traefik's
+      # dashboard, hence the loopback-only port below.
+      - CALLBACK_URL=http://127.0.0.1:3080
+    ports:
+      - "127.0.0.1:3080:8080"
     volumes:
-      # Read the fail2ban database to display ban history
-      - /home/tim/fail2ban:/data
+      # UI settings, ban history database and callback secret
+      - /home/tim/fail2ban-ui:/config
+      # Same config tree as the fail2ban container. fail2ban-client parses the
+      # config client-side on test/reload, so the UI needs the full tree.
+      - /home/tim/fail2ban-config/fail2ban:/etc/fail2ban
+      # The repo files above are bind-mounted into the fail2ban container
+      # only - the host directory just holds Docker's empty placeholders, so
+      # mount them here too or the UI's reloads would see empty jails.
+      - ./service/fail2ban/jail.d/sshd.local:/etc/fail2ban/jail.d/sshd.local:ro
+      - ./service/fail2ban/jail.d/traefik-auth.local:/etc/fail2ban/jail.d/traefik-auth.local:ro
+      - ./service/fail2ban/jail.d/traefik-botsearch.local:/etc/fail2ban/jail.d/traefik-botsearch.local:ro
+      - ./service/fail2ban/filter.d/traefik-botsearch.local:/etc/fail2ban/filter.d/traefik-botsearch.local:ro
       # Same host directory as fail2ban's /var/run/fail2ban mount — Docker
       # can't bind-mount a socket file that doesn't exist yet, so mount the
       # whole directory and let fail2ban create the socket inside it.
       - /home/tim/fail2ban-run:/var/run/fail2ban
+      # Lets the UI test a jail's logpath before enabling it
+      - /var/log:/var/log:ro
     networks:
       - proxy
     labels:
