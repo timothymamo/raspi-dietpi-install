@@ -71,6 +71,8 @@ services:
       - ./service/fail2ban/jail.d/traefik-botsearch.local:/config/fail2ban/jail.d/traefik-botsearch.local:ro
       # Custom filter - not bundled in this image, see the file for why.
       - ./service/fail2ban/filter.d/traefik-botsearch.local:/config/fail2ban/filter.d/traefik-botsearch.local:ro
+      # Fallback banaction until fail2ban-ui writes jail.local, see the file for why.
+      - ./service/fail2ban/paths-overrides.local:/config/fail2ban/paths-overrides.local:ro
       # Expose the socket directory to the host so fail2ban-ui can reach it.
       # The socket is created inside the container; without this mount it
       # never appears on the host and fail2ban-ui's bind mount points at nothing.
@@ -102,6 +104,7 @@ services:
       - ./service/fail2ban/jail.d/traefik-auth.local:/etc/fail2ban/jail.d/traefik-auth.local:ro
       - ./service/fail2ban/jail.d/traefik-botsearch.local:/etc/fail2ban/jail.d/traefik-botsearch.local:ro
       - ./service/fail2ban/filter.d/traefik-botsearch.local:/etc/fail2ban/filter.d/traefik-botsearch.local:ro
+      - ./service/fail2ban/paths-overrides.local:/etc/fail2ban/paths-overrides.local:ro
       # Same host directory as fail2ban's /var/run/fail2ban mount — Docker
       # can't bind-mount a socket file that doesn't exist yet, so mount the
       # whole directory and let fail2ban create the socket inside it.

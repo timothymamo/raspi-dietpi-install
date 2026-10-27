@@ -1,0 +1,7 @@
+# linuxserver/fail2ban's jail.conf leaves banaction undefined and expects
+# jail.local to set it, so fail2ban won't start until fail2ban-ui has written
+# its managed jail.local. paths-lsio.conf includes this file before jail.conf,
+# so these are only fallbacks - the UI's jail.local still overrides them.
+[DEFAULT]
+banaction = iptables-multiport
+banaction_allports = iptables-allports
