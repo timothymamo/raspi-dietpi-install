@@ -28,6 +28,7 @@ apt -y install \
   mailutils \
   rsyslog \
   vim \
+  tree \
   zsh \
   zsh-syntax-highlighting \
   zsh-autosuggestions \
