@@ -52,7 +52,7 @@ services:
     restart: unless-stopped
 
   fail2ban:
-    image: lscr.io/linuxserver/fail2ban:1.1.0-r2-ls47
+    image: lscr.io/linuxserver/fail2ban:1.1.0-r2-ls48
     container_name: fail2ban
     cap_add:
       - NET_ADMIN
